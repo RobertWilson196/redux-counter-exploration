@@ -1,42 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
-import { createStore } from 'redux';
-
-//initial state
-const initialState = 0;
-//reducer
-const countReducer = (state = initialState, action) =>
-{
-  switch(action.type){
-
-    case 'INCREMENT':
-      state = state + 1;
-      return state;
-
-    case 'DECREMENT':
-      state = state - 1;
-      return state;
-    
-    default:
-      return state;
-  }
-};
-
-//creation of the store
-const store = createStore(countReducer,
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
+    console.log(this);
     return (
       <div>
-      <h1>{store.getState()}</h1>
-      <button onClick={store.dispatch({type: "INCREMENT" })}>+</button>
-      <button onClick={store.dispatch({type: "DECREMENT" })}>-</button>
+        <h1>{this.props.count}</h1>
+        <button onClick={() => this.props.dispatch({type: "INCREMENT"})}>+</button>
+        <button onClick={() => this.props.dispatch({type: "DECREMENT"})}>-</button>
       </div>
     );
   }
 }
+const mapStateToProps = (state) =>
+{
+  return {
+    count: state
+  }
+}
 
-export default App;
+export default connect(mapStateToProps, null)(App);
  
