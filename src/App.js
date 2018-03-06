@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import Counter from './Counter';
-import { incrementAction, 
-         decrementAction,
-         incrementByAction, 
+import { incrementByAction, 
          decrementByAction } from './counter/actions';
 
 const connectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
@@ -30,8 +28,6 @@ const mapStateToProps = (state) =>
 const mapDispatchToProps = (dispatch) =>
 {
   return {
-    increment: () => dispatch(incrementAction()),
-    decrement: () => dispatch(decrementAction()),
     incrementBy: (int) => dispatch(incrementByAction(int)),
     decrementBy: (int) => dispatch(decrementByAction(int))
   }
